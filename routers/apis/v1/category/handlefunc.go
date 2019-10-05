@@ -15,17 +15,19 @@ func GetCategory(c echo.Context) error {
 	code := http.StatusOK
 	maps := make(map[string]interface{})
 	resp := make(map[string]interface{})
+
 	totalItems := models.GetTagTotal(maps)
 	page := com.StrTo(c.QueryParam("page")).MustInt()
+	pageSize := settings.GlobalConf["PAGESIZE"].(int)
+	pageOffset := (page - 1) * pageSize
+	totalPage := (totalItems / pageSize) + 1
 
-	if page <= 0 || page > totalItems {
+	if page <= 0 || page > totalPage {
 		page = 1
 		code = http.StatusBadRequest
 		resp["message"] = "页码错误"
 		return c.JSON(code, &resp)
 	}
-	pageSize := settings.GlobalConf["PAGESIZE"].(int)
-	pageOffset := (page - 1) * pageSize
 
 	nextPage := strconv.Itoa(page + 1)
 	prevPage := "1"
@@ -35,7 +37,7 @@ func GetCategory(c echo.Context) error {
 
 	resp["list"] = models.GetCategoryList(pageOffset, pageSize, maps)
 	resp["cur_page"] = page
-	resp["total"] = totalItems
+	resp["total_page"] = totalPage
 	resp["prev_page"] = c.Request().Host + c.Echo().Reverse("GetCategorys") + "?page=" + prevPage
 	resp["next_page"] = c.Request().Host + c.Echo().Reverse("GetCategorys") + "?page=" + nextPage
 

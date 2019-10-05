@@ -11,7 +11,7 @@ require (
 	github.com/couchbase/gomemcached v0.0.0-20190608153736-7c1f4fd19ef7 // indirect
 	github.com/couchbase/goutils v0.0.0-20190315194238-f9d42b11473b // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20190820223206-44cdfe8d8ba9 // indirect
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/edsrzf/mmap-go v1.0.0 // indirect
 	github.com/go-redis/redis v6.15.2+incompatible // indirect
 	github.com/gogo/protobuf v1.2.1 // indirect
