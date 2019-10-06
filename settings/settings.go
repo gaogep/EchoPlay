@@ -30,4 +30,5 @@ func LoadDBCOnf(cfg *ini.File) {
 
 func LoadGlobalConf(cfg *ini.File) {
 	GlobalConf["PAGESIZE"] = cfg.Section("glb").Key("PSIZE").MustInt()
+	GlobalConf["JWTSECRET"] = cfg.Section("glb").Key("JWTSECRET").Value()
 }

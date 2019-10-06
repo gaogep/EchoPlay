@@ -1,6 +1,8 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 type User struct {
 	ID        int       `gorm:"NOT NULL;PRIMARY_KEY;INDEX;AUTO_INCREMENT" json:"id"`
@@ -24,7 +26,7 @@ func ExistedUserById(id int) bool {
 
 func ValidateUserByName(name string, passwd string) bool {
 	var user User
-	db.Select("passwd").Where("name = ?", name).First(&user)
+	db.Select("pass_wd").Where("nick_name = ?", name).First(&user)
 	if user.PassWd == passwd {
 		return true
 	}
